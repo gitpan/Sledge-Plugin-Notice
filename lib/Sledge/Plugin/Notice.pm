@@ -3,7 +3,7 @@ package Sledge::Plugin::Notice;
 use strict;
 use warnings;
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 use Carp ();
 
@@ -60,11 +60,11 @@ Sledge::Plugin::Notice - show one-time message
 
 =head1 DESCRIPTION
 
-  Sledge::Plugin::Notice is a plugin for Sledge to show one-time message. 
+Sledge::Plugin::Notice is a plugin for Sledge to show one-time message. 
 
 =head1 SEE ALSO
 
-  L<Bundle::Sledge>
+L<Bundle::Sledge>
 
 =head1 AUTHOR
 
