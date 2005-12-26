@@ -1,37 +1,27 @@
-Sledge-Plugin-Notice version 0.01
-=================================
+NAME
+       Sledge::Plugin::Notice - show one-time message
 
-The README is used to introduce the module and provide instructions on
-how to install the module, any machine dependencies it may have (for
-example C compilers and installed libraries) and any other information
-that should be provided before the module is installed.
+SYNOPSIS
+         # in your Sledge::Pages
+         use Sledge::Plugin::Notice;
+         sub post_dispatch_foo {
+             my $self = shift;
+             # do something..
+             $self->notice('Item was successfully created.');
+             $self->redirect('bar');
+         }
+         # in your template
+         [% IF notice %]<h2>[% notice %]</h2>[% END %]
 
-A README file is required for CPAN modules since CPAN extracts the
-README file from a module distribution so that people browsing the
-archive can use it get an idea of the modules uses. It is usually a
-good idea to provide version information here so that people can
-decide whether fixes for the module are worth downloading.
+DESCRIPTION
+       Sledge::Plugin::Notice is a plugin for Sledge to show one-
+       time message.
 
-INSTALLATION
+SEE ALSO
+       Bundle::Sledge
 
-To install this module type the following:
+AUTHOR
+       Jiro Nishiguchi <jiro@cpan.org>
 
-   perl Makefile.PL
-   make
-   make test
-   make install
-
-DEPENDENCIES
-
-This module requires these other modules and libraries:
-
-  Bundle::Sledge
-
-COPYRIGHT AND LICENCE
-
-Copyright (C) 2005 by Jiro Nishiguchi
-
-This library is free software; you can redistribute it and/or modify
-it under the same terms as Perl itself.
-
-
+       This library is free software; you can redistribute it
+       and/or modify it under the same terms as Perl itself.

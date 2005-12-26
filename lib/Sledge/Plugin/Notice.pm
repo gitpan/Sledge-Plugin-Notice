@@ -3,7 +3,7 @@ package Sledge::Plugin::Notice;
 use strict;
 use warnings;
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 use Carp ();
 
@@ -14,6 +14,7 @@ sub import {
         Carp::carp('use it from Sledge::Pages.');
         return;
     }
+    my $sess_key = __PACKAGE__.'::notice';
     $caller->register_hook(
         AFTER_DISPATCH => sub {
             my $self = shift;
@@ -22,20 +23,18 @@ sub import {
         },
         AFTER_OUTPUT => sub {
             my $self = shift;
-            $self->session->remove('_notice');
+            $self->session->remove($sess_key);
         },
     );
     no strict 'refs';
-    *{"$caller\::notice"} = \&_notice;
-}
-
-sub _notice {
-    my $self = shift;
-    if (@_ == 0) {
-        return $self->session->param('_notice');
-    } elsif (@_ == 1) {
-        $self->session->param(_notice => $_[0]);
-    }
+    *{"$caller\::notice"} = sub {
+        my $self = shift;
+        if (@_ == 0) {
+            return $self->session->param($sess_key);
+        } elsif (@_ == 1) {
+            $self->session->param($sess_key => $_[0]);
+        }
+    };
 }
 
 1;
@@ -68,7 +67,7 @@ L<Bundle::Sledge>
 
 =head1 AUTHOR
 
-Jiro Nishiguchi, E<lt>jiro@cpan.orgE<gt>
+Jiro Nishiguchi E<lt>jiro@cpan.orgE<gt>
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself.
